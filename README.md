@@ -10,12 +10,14 @@
 2. Create fixtures for the page classes initialization:
 - menuPage
 - cartPage   
-3. Create fixture `prices`:
--  It should return an object with all coffee names as keys and prices as values (numbers), i.e { espresso: 10, cappucino: 19}.
-4. Create helper method `getPriceForQuantity` under `src/common/helpers/getPriceForQuantity.ts` folder. 
-- This method should have two input parameters `priceForOne` and `quantity` and return the total Price for a coffe cups.
+3. Create `constants.js` file under the `./src` folder:
+- This file should export a constant object of coffee prices, example: { espresso: 10, cappucino: 19}.
+4. Create helper method `getPriceForQuantity` under `src/common/helpers/getPriceForQuantity.ts` folder. This file should have three functions: unitPriceFormatStr, priceFormatStr, totalPriceFormatStr
+- First: get as input unitPrice and unitsNumber, return a formatted price, example of output: `10.00 x 1`.
+- Second: get as input unitPrice, return a formatted price, example of output: `$10.00`.
+- Third: get as input unitsNumber, return a formatted price, example of output: `Total: $10.00`.
 5. Update all the tests to use corresponiding fixtures for classes initialization.
-6. Update all the tests to use `prices` fixture and method `getPriceForQuantity` instead of hard-coded prices.  
+6. Update all the tests to use prices from constants and price formatting methods instead of hard-coded prices.  
 7. Re-run all your tests and make sure they pass after the updates. 
 
 ## Task Reporting: 
