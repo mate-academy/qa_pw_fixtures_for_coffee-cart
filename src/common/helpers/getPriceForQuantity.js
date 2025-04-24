@@ -1,4 +1,6 @@
 export function unitPriceFormatStr(unitPrice, unitsNumber) {
+  unitPrice = parseFloat(unitPrice.toString()).toFixed(2);
+
   return `${unitPrice} x ${unitsNumber}`;
 }
 
