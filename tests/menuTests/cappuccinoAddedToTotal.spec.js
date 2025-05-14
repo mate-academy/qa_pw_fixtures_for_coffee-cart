@@ -1,13 +1,10 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
+import { test } from '../_fixtures/fixtures';
 
 test('Check Cappuccino cost is added to Total on menu page', async ({
-  page,
+  menuPage,
 }) => {
-  const menuPage = new MenuPage(page);
-
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
+  await menuPage.clickCappucсinoCup();
 
   await menuPage.assertTotalCheckoutContainsValue('Total: $19.00');
 });
