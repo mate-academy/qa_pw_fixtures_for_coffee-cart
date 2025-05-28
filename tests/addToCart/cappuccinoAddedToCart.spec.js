@@ -1,11 +1,11 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../_fixtures/fixtures';
+import { price } from '../../src/constants';
 
-test('Check Cappuccino correctly added to the Cart', async ({ page }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-
+test('Check Cappuccino correctly added to the Cart', async ({
+  cartPage,
+  menuPage,
+  priceFormatter,
+}) => {
   await menuPage.open();
   await menuPage.clickCappucinoCup();
 
@@ -13,6 +13,13 @@ test('Check Cappuccino correctly added to the Cart', async ({ page }) => {
   await cartPage.waitForLoading();
 
   await cartPage.assertCappuccinoNameIsContainsCorrectText();
-  await cartPage.assertCappuccinoUnitContainsCorrectText('$19.00 x 1');
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$19.00');
+
+  const expectedUnitPrice = priceFormatter.unitPriceFormatStr(
+    price.cappucсino,
+    1,
+  );
+  await cartPage.assertCappuccinoUnitContainsCorrectText(expectedUnitPrice);
+
+  const expectedPrice = priceFormatter.priceFormatStr(price.cappucсino);
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(expectedPrice);
 });
