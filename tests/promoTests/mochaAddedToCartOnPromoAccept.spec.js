@@ -1,12 +1,18 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../fixtures/Fixturess';
+import { coffeePrices } from '../../src/pages/constants';
+import { priceFormatStr } from '../../src/pages/common/helpers/getPriceForQuantity';
+import { mocha } from '../../src/pages/constants';
 
-test('Assert discounted Mocha added to the Cart after promo accepting', async ({
-  page,
-}) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+test('Assert discounted Mocha added to the Cart after promo accepting', async ({ cartPage, menuPage }) => {
+  const cappuccinoPrice = coffeePrices.cappuccino;
+  const espressoPrice = coffeePrices.espresso;
+  const americanoPrice = coffeePrices.americano;
+  const mochaDiscount = mocha.mochadiscount;
+  const units = 1;
+
+  const expectedEspressoPriceText = priceFormatStr(espressoPrice, units);
+  const expectedCappuccinoPriceText = priceFormatStr(cappuccinoPrice, units);
+  const expectedAmericanoPriceText = priceFormatStr(americanoPrice, units);
 
   await menuPage.open();
   await menuPage.clickCappucinoCup();
@@ -20,8 +26,8 @@ test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
-  await cartPage.assertDiscountedMochaTotalCostContainsCorrectText('$4.00');
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$19.00');
-  await cartPage.assertAmericanoTotalCostContainsCorrectText('$7.00');
+  await cartPage.assertEspressoTotalCostContainsCorrectText(expectedEspressoPriceText);
+  await cartPage.assertDiscountedMochaTotalCostContainsCorrectText(mochaDiscount);
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(expectedCappuccinoPriceText);
+  await cartPage.assertAmericanoTotalCostContainsCorrectText(expectedAmericanoPriceText);
 });
