@@ -10,9 +10,9 @@ test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   cartPage
 }) => {
 
-  
+
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
+  await menuPage.clickCappuccinoCup();
   await menuPage.clickEspressoCup();
   await menuPage.clickAmericanoCup();
 
