@@ -1,18 +1,26 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../_fixtures/fixtures';
+import { 
+  priceFormatStr
+} from '../../src/common/helpers/getPriceForQuantity';
+import { COFFEE_PRICES } from '../../src/constants';
 
-test('Check Cappuccino correctly added to the Cart', async ({ page }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+const CAPPUCCINO_PRICE_X1 = `${priceFormatStr(COFFEE_PRICES.cappuccino)} x 1`
+
+test('Check Cappuccino correctly added to the Cart', async ({ 
+  cartPage,
+  menuPage
+ }) => {
+
 
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
+  await menuPage.clickCappuccinoCup();
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
   await cartPage.assertCappuccinoNameIsContainsCorrectText();
-  await cartPage.assertCappuccinoUnitContainsCorrectText('$19.00 x 1');
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$19.00');
+  await cartPage.assertCappuccinoUnitContainsCorrectText(CAPPUCCINO_PRICE_X1);
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(
+    priceFormatStr(COFFEE_PRICES.cappuccino)
+  );
 });

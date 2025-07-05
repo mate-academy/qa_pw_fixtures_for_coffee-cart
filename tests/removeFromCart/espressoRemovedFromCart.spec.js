@@ -1,12 +1,10 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../_fixtures/fixtures';
 
 test('Check Espresso removed from Cart after clicking remove button', async ({
-  page,
+  cartPage,
+  menuPage
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+
 
   await menuPage.open();
   await menuPage.clickEspressoCup();
