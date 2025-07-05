@@ -6,11 +6,10 @@ export class CartPage {
     this.cartListLocator = page.getByRole('list').nth(1);
 
     this.espressoItem = (
-      this
-      .cartListLocator
-      .getByRole('listitem').
-      filter({ hasText: 'Espresso'})
-    );  
+      this.cartListLocator
+      .getByRole('listitem')
+      .filter({ hasText: 'Espresso'})
+    );
     this.espressoName = this.espressoItem.locator('div').nth(0); 
     this.espressoUnit = this.espressoItem.locator('div').nth(1); 
     this.espressoTotalCost = this.espressoItem.locator('div').nth(3); 

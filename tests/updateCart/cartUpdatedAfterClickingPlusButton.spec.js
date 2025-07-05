@@ -1,4 +1,4 @@
-import { test } from '../fixtures/fixtures';
+import { test } from '../_fixtures/fixtures';
 import { 
   totalPriceFormatStr,
   priceFormatStr,
