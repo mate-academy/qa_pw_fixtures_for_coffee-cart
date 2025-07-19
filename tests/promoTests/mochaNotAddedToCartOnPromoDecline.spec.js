@@ -36,7 +36,7 @@ test('Assert discounted Mocha is not added to the Cart after promo declining', a
   await cartPage.assertCoffeeRowIsCorrect(cappuccinoName, cappuccinoOrder);
   await cartPage.assertCoffeeRowIsCorrect(espressoName, espressoOrder);
   await cartPage.assertCoffeeRowIsCorrect(americanoName, americanoOrder);
-  await cartPage.assetCoffeeIsNotVisible(discountedMochaName);
+  await cartPage.assertCoffeeIsNotVisible(discountedMochaName);
 
   const expectedTotal =
     parsePrice(cappuccinoOrder.totalPriceFormatStr) +

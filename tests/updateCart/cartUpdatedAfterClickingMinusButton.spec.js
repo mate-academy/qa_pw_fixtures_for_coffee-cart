@@ -17,12 +17,12 @@ test('Assert cart updated correctly after clicking minus for drinks', async ({
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assetCoffeeIsVisible(espressoName);
-  await cartPage.assetCoffeeIsVisible(cappuccinoName);
+  await cartPage.assertCoffeeIsVisible(espressoName);
+  await cartPage.assertCoffeeIsVisible(cappuccinoName);
 
   await cartPage.clickRemoveOneCoffeeButton(espressoName);
   await cartPage.clickRemoveOneCoffeeButton(cappuccinoName);
 
-  await cartPage.assetCoffeeIsNotVisible(espressoName);
-  await cartPage.assetCoffeeIsNotVisible(cappuccinoName);
+  await cartPage.assertCoffeeIsNotVisible(espressoName);
+  await cartPage.assertCoffeeIsNotVisible(cappuccinoName);
 });
