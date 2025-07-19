@@ -1,19 +1,20 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../_fixtures/fixtures';
 
 test('Check Cappuccino removed from Cart after clicking remove button', async ({
-  page,
+  menuPage,
+  cartPage,
+  coffeeCatalog,
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+  const coffeeKey = 'cappuccino';
+  const coffeeName = coffeeCatalog[coffeeKey].name;
 
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
+  await menuPage.clickCoffeeCup(coffeeName);
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.clickRemoveAllCappucinoButton();
+  await cartPage.assertCoffeeIsVisible(coffeeName);
+  await cartPage.clickRemoveAllCoffeeButton(coffeeName);
   await cartPage.assertNoCoffeeMessageIsVisible();
 });

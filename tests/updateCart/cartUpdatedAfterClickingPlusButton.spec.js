@@ -1,31 +1,38 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
-
+import { test } from '../_fixtures/fixtures';
 test('Assert cart updated correctly after clicking plus for drinks', async ({
-  page,
+  menuPage,
+  cartPage,
+  coffeeCatalog,
+  parsePrice,
+  getFormattedPrice,
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+  const cappuccinoKey = 'cappuccino';
+  const cappuccinoName = coffeeCatalog[cappuccinoKey].name;
+
+  const espressoKey = 'espresso';
+  const espressoName = coffeeCatalog[espressoKey].name;
 
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
+  await menuPage.clickCoffeeCup(cappuccinoName);
+  await menuPage.clickCoffeeCup(espressoName);
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
+  let espressoOrder = await getFormattedPrice(espressoKey, 1);
+  await cartPage.assertCoffeeRowIsCorrect(espressoName, espressoOrder);
+  await cartPage.clickAddOneCoffeeButton(espressoName);
+  espressoOrder = await getFormattedPrice(espressoKey, 2);
+  await cartPage.assertCoffeeRowIsCorrect(espressoName, espressoOrder);
 
-  await cartPage.clickAddOneEspressoButton();
+  let cappuccinoOrder = await getFormattedPrice(cappuccinoKey, 1);
+  await cartPage.assertCoffeeRowIsCorrect(cappuccinoName, cappuccinoOrder);
+  await cartPage.clickAddOneCoffeeButton(cappuccinoName);
+  cappuccinoOrder = await getFormattedPrice(cappuccinoKey, 2);
+  await cartPage.assertCoffeeRowIsCorrect(cappuccinoName, cappuccinoOrder);
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$20.00');
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$19.00');
-
-  await cartPage.clickAddOneCappuccinoButton();
-
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$38.00');
-  await cartPage.assertEspressoTotalCostContainsCorrectText('20.00');
-
-  await cartPage.assertTotalCheckoutContainsValue('$58.00');
+  const expectedTotal =
+    parsePrice(cappuccinoOrder.totalPriceFormatStr) +
+    parsePrice(espressoOrder.totalPriceFormatStr);
+  await cartPage.assertCheckoutContainsText(expectedTotal);
 });
