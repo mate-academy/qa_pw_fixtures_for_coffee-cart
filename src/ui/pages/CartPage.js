@@ -20,13 +20,13 @@ export class CartPage {
     await this.page.reload();
   }
 
-  async assetCoffeeIsVisible(coffeeName) {
+  async assertCoffeeIsVisible(coffeeName) {
     await expect(
       this.cartListRow.filter({ hasText: coffeeName }),
     ).toBeVisible();
   }
 
-  async assetCoffeeIsNotVisible(coffeeName) {
+  async assertCoffeeIsNotVisible(coffeeName) {
     await expect(
       this.cartListRow.filter({ hasText: coffeeName }),
     ).not.toBeVisible();

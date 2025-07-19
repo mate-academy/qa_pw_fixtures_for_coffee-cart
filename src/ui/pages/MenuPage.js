@@ -25,10 +25,12 @@ export class MenuPage {
   }
 
   async getCoffeePrice(name) {
-    await this.page
+    return this.page
       .getByRole('listitem')
       .filter({ has: this.findCoffeeCup(name) })
-      .inputValue();
+      .locator('small')
+      .first()
+      .textContent();
   }
 
   async clickCartLink() {
