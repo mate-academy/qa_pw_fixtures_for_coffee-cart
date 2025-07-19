@@ -5,20 +5,20 @@ test('Check Cappuccino correctly added to the Cart', async ({
   cartPage,
   coffeeCatalog,
   getFormattedPrice,
+  parsePrice,
 }) => {
+  const coffeeKey = 'cappuccino';
+  const coffeeName = coffeeCatalog[coffeeKey].name;
+
   await menuPage.open();
-  await menuPage.clickCoffeeCup(coffeeCatalog.cappuccino.name);
+  await menuPage.clickCoffeeCup(coffeeName);
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  const cup = getFormattedPrice('cappuccino', 1);
+  const coffeeOrder = await getFormattedPrice(coffeeKey, 1);
+  await cartPage.assertCoffeeRowIsCorrect(coffeeName, coffeeOrder);
 
-  await cartPage.assertCappuccinoNameIsContainsCorrectText();
-  await cartPage.assertCappuccinoUnitContainsCorrectText(
-    cup.unitPriceFormatStr,
-  );
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText(
-    cup.totalPriceFormatStr,
-  );
+  const expectedTotal = parsePrice(coffeeOrder.totalPriceFormatStr);
+  await cartPage.assertCheckoutContainsText(expectedTotal);
 });

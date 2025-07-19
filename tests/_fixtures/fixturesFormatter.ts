@@ -1,8 +1,10 @@
 import { test as base } from '@playwright/test';
+import { getPrice } from '../../src/common/helpers/getPrice';
 import { getPriceForQuantity } from '../../src/common/helpers/getPriceForQuantity';
 import { COFFEE_CATALOG } from '../../src/ui/constants/coffeeCatalog';
 
 export const test = base.extend<{
+  parsePrice: (priceStr: string) => number;
   coffeeCatalog: typeof COFFEE_CATALOG;
   getFormattedPrice: (
     key: keyof typeof COFFEE_CATALOG,
@@ -13,6 +15,10 @@ export const test = base.extend<{
     totalPriceFormatStr: string;
   };
 }>({
+  parsePrice: async ({}, use) => {
+    await use(getPrice);
+  },
+
   coffeeCatalog: async ({}, use) => {
     await use(COFFEE_CATALOG);
   },

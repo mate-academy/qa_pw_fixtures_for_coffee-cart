@@ -1,18 +1,24 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage }from '../../src/pages/CartPage';
+import { test } from '../_fixtures/fixtures';
 
-test('Check Espresso correctly added to the Cart', async ({ page }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-      
+test('Check Espresso correctly added to the Cart', async ({
+  menuPage,
+  cartPage,
+  coffeeCatalog,
+  getFormattedPrice,
+  parsePrice,
+}) => {
+  const coffeeKey = 'espresso';
+  const coffeeName = coffeeCatalog[coffeeKey].name;
+
   await menuPage.open();
-  await menuPage.clickEspressoCup();
-  
+  await menuPage.clickCoffeeCup(coffeeName);
+
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoNameIsContainsCorrectText();
-  await cartPage.assertEspressoUnitContainsCorrectText('$10.00 x 1');
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
+  const coffeeOrder = await getFormattedPrice(coffeeKey, 1);
+  await cartPage.assertCoffeeRowIsCorrect(coffeeName, coffeeOrder);
+
+  const expectedTotal = parsePrice(coffeeOrder.totalPriceFormatStr);
+  await cartPage.assertCheckoutContainsText(expectedTotal);
 });

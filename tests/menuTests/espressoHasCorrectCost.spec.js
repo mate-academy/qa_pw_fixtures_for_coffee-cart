@@ -1,10 +1,17 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-
-test('Check Espresso cup has correct cost', async ({ page }) => {
-  const menuPage = new MenuPage(page);
+import { test } from '../_fixtures/fixtures';
+test('Check Espresso cup has correct cost', async ({
+  menuPage,
+  coffeeCatalog,
+  getFormattedPrice,
+}) => {
+  const coffeeKey = 'espresso';
+  const coffeeName = coffeeCatalog[coffeeKey].name;
 
   await menuPage.open();
 
-  await menuPage.assertEspressoCupCostHasValue('$10.00');
+  const coffeeOrder = await getFormattedPrice(coffeeKey, 1);
+  await menuPage.assertCoffeeCupCostHasValue(
+    coffeeName,
+    coffeeOrder.priceFormatStr,
+  );
 });

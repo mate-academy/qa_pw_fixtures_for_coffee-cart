@@ -1,11 +1,18 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
+import { test } from '../_fixtures/fixtures';
 
-test('Check Espresso cost is added to Total on menu page', async ({ page }) => {
-  const menuPage = new MenuPage(page);
+test('Check Espresso cost is added to Total on menu page', async ({
+  menuPage,
+  coffeeCatalog,
+  parsePrice,
+  getFormattedPrice,
+}) => {
+  const coffeeKey = 'espresso';
+  const coffeeName = coffeeCatalog[coffeeKey].name;
 
   await menuPage.open();
-  await menuPage.clickEspressoCup();
+  await menuPage.clickCoffeeCup(coffeeName);
 
-  await menuPage.assertTotalCheckoutContainsValue('Total: $10.00');
+  const coffeeOrder = await getFormattedPrice(coffeeKey, 1);
+  const expectedTotal = parsePrice(coffeeOrder.totalPriceFormatStr);
+  await menuPage.assertTotalCheckoutContainsValue(expectedTotal);
 });

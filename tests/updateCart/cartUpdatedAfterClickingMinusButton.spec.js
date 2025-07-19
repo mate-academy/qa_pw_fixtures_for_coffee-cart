@@ -1,29 +1,28 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
-
+import { test } from '../_fixtures/fixtures';
 test('Assert cart updated correctly after clicking minus for drinks', async ({
-  page,
+  menuPage,
+  cartPage,
+  coffeeCatalog,
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+  const cappuccinoKey = 'cappuccino';
+  const cappuccinoName = coffeeCatalog[cappuccinoKey].name;
+
+  const espressoKey = 'espresso';
+  const espressoName = coffeeCatalog[espressoKey].name;
 
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
+  await menuPage.clickCoffeeCup(cappuccinoName);
+  await menuPage.clickCoffeeCup(espressoName);
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoItemIsVisible();
+  await cartPage.assetCoffeeIsVisible(espressoName);
+  await cartPage.assetCoffeeIsVisible(cappuccinoName);
 
-  await cartPage.clickRemoveOneEspressoButton();
+  await cartPage.clickRemoveOneCoffeeButton(espressoName);
+  await cartPage.clickRemoveOneCoffeeButton(cappuccinoName);
 
-  await cartPage.assertEspressoItemIsHidden();
-  await cartPage.assertCappuccinoItemIsVisible();
-
-  await cartPage.clickRemoveOneCappuccinoButton();
-
-  await cartPage.assertCappuccinoItemIsHidden();
-  await cartPage.assertNoCoffeeMessageIsVisible();
+  await cartPage.assetCoffeeIsNotVisible(espressoName);
+  await cartPage.assetCoffeeIsNotVisible(cappuccinoName);
 });

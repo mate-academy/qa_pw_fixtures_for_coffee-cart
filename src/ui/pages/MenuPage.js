@@ -44,7 +44,7 @@ export class MenuPage {
   }
 
   async assertTotalCheckoutContainsValue(value) {
-    await expect(this.totalCheckout).toContainText(value);
+    await expect(this.totalCheckout).toContainText(`Total: $${value}`);
   }
 
   async assertCoffeeCupCostHasValue(name, value) {
