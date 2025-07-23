@@ -1,11 +1,13 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
+import { test } from '../fixtures/fixtures';
+import { totalPriceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
+import { coffeePrices } from '../../src/constants';
 
-test('Check Espresso cost is added to Total on menu page', async ({ page }) => {
-  const menuPage = new MenuPage(page);
+// eslint-disable-next-line max-len
+test('Check Espresso cost is added to Total on menu page', async ({ menuPage }) => {
 
   await menuPage.open();
   await menuPage.clickEspressoCup();
 
-  await menuPage.assertTotalCheckoutContainsValue('Total: $10.00');
+  // eslint-disable-next-line max-len
+  await menuPage.assertTotalCheckoutContainsValue(totalPriceFormatStr(coffeePrices.espresso));
 });
