@@ -1,4 +1,4 @@
 export const coffeePrices = {
-  espresso: 10, cappucino: 19, latte: 4, milkshake: 7,
-  allIn: 58, doubleesspresso: 20, triplecappucino: 38
+  espresso: 10, cappuccino: 19, latte: 4, milkshake: 7,
+  allIn: 58, doubleespresso: 20, triplecappucino: 38
 }

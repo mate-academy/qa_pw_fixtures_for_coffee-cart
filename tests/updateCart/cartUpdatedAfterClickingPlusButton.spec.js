@@ -19,16 +19,16 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
   await cartPage.clickAddOneEspressoButton();
 
   await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(
-    coffeePrices.doubleesspresso));
+    coffeePrices.doubleespresso));
   await cartPage.assertCappuccinoTotalCostContainsCorrectText(priceFormatStr(
-    coffeePrices.cappucino));
+    coffeePrices.cappuccino));
 
   await cartPage.clickAddOneCappuccinoButton();
 
   await cartPage.assertCappuccinoTotalCostContainsCorrectText(priceFormatStr(
     coffeePrices.triplecappucino));
   await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(
-    coffeePrices.doubleesspresso));
+    coffeePrices.doubleespresso));
 
   await cartPage.assertTotalCheckoutContainsValue(priceFormatStr(
     coffeePrices.allIn));

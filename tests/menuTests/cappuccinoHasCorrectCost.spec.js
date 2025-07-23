@@ -7,5 +7,5 @@ test('Check Cappuccino cup has correct cost', async ({ menuPage }) => {
   await menuPage.open();
 
   // eslint-disable-next-line max-len
-  await menuPage.assertCappuccinoCupCostHasValue(priceFormatStr(coffeePrices.cappucino));
+  await menuPage.assertCappuccinoCupCostHasValue(priceFormatStr(coffeePrices.cappuccino));
 });

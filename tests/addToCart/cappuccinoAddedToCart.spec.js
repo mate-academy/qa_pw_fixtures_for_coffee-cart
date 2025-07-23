@@ -13,7 +13,7 @@ test('Check Cappuccino correctly added to the Cart', async ({ menuPage, cartPage
 
   await cartPage.assertCappuccinoNameIsContainsCorrectText();
   // eslint-disable-next-line max-len
-  await cartPage.assertCappuccinoUnitContainsCorrectText(unitPriceFormatStr(coffeePrices.cappucino, 1));
+  await cartPage.assertCappuccinoUnitContainsCorrectText(unitPriceFormatStr(coffeePrices.cappuccino, 1));
   // eslint-disable-next-line max-len
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText(priceFormatStr(coffeePrices.cappucino));
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(priceFormatStr(coffeePrices.cappuccino));
 });
