@@ -1,10 +1,13 @@
-import { test } from '@playwright/test';
+import { test } from '../fixtures/fixtures';
 import { MenuPage } from '../../src/pages/MenuPage';
 import { CartPage } from '../../src/pages/CartPage';
 
-test('Assert cart cleaned after page refresh', async ({ page }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+test('Assert cart cleaned after page refresh', async ({ 
+  menuPage,
+  cartPage
+ }) => {
+  // const menuPage = new MenuPage(page);
+  // const cartPage = new CartPage(page);
 
   await menuPage.open();
   await menuPage.clickCappucinoCup();

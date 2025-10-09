@@ -1,13 +1,18 @@
-import { test } from '@playwright/test';
+import { test } from '../fixtures/fixtures';
 import { MenuPage } from '../../src/pages/MenuPage';
+import { coffeePrices } from '../../src/constants';
+import { totalPriceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Check Cappuccino cost is added to Total on menu page', async ({
-  page,
+  menuPage
 }) => {
-  const menuPage = new MenuPage(page);
-
   await menuPage.open();
   await menuPage.clickCappucinoCup();
 
-  await menuPage.assertTotalCheckoutContainsValue('Total: $19.00');
+  const cappuccinoPrice = coffeePrices.cappucino;
+  const cappuccinoUnits = 1;
+
+  await menuPage.assertTotalCheckoutContainsValue(
+    totalPriceFormatStr(cappuccinoPrice * cappuccinoUnits)
+  );
 });
