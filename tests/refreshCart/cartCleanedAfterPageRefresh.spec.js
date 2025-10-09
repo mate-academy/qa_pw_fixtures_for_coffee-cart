@@ -1,6 +1,4 @@
 import { test } from '../fixtures/fixtures';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
 
 test('Assert cart cleaned after page refresh', async ({ 
   menuPage,

@@ -1,6 +1,4 @@
 import { test } from '../fixtures/fixtures';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
 
 test('Assert cart updated correctly after clicking minus for drinks', async ({
   menuPage,

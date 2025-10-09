@@ -1,5 +1,4 @@
 import { test } from '../fixtures/fixtures';
-import { MenuPage } from '../../src/pages/MenuPage';
 import { coffeePrices } from '../../src/constants';
 import { totalPriceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 

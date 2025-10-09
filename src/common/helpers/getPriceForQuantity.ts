@@ -1,5 +1,3 @@
-import { coffeePrices } from '../../../src/constants'
-
 export function unitPriceFormatStr(unitPrice: number, unitsNumber: number): string {
     const formatedPrice = `${unitPrice.toFixed(2)} x ${unitsNumber}`;
 
@@ -12,8 +10,8 @@ export function priceFormatStr(unitPrice: number): string {
     return formatedPrice;
 }
 
-export function totalPriceFormatStr(totalPrice: number): string {
-    const formatedPrice = `Total: $${totalPrice.toFixed(2)}`;
+export function totalPriceFormatStr(unitNumber: number): string {
+    const formatedPrice = `Total: $${unitNumber.toFixed(2)}`;
 
     return formatedPrice;
 }
