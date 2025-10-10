@@ -10,6 +10,6 @@ test('Check Espresso cost is added to Total on menu page', async ({ menuPage }) 
   const espressoUnits = 1;
 
   await menuPage.assertTotalCheckoutContainsValue(
-    totalPriceFormatStr(espressoPrice * espressoUnits)
+    totalPriceFormatStr(espressoPrice, espressoUnits)
   );
 });

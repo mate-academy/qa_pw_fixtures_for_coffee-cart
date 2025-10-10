@@ -10,8 +10,8 @@ export function priceFormatStr(unitPrice: number): string {
     return formatedPrice;
 }
 
-export function totalPriceFormatStr(unitNumber: number): string {
-    const formatedPrice = `Total: $${unitNumber.toFixed(2)}`;
+export function totalPriceFormatStr(unitPrice: number, unitNumber: number): string {
+    const formatedPrice = `Total: $${(unitPrice * unitNumber).toFixed(2)}`;
 
     return formatedPrice;
 }

@@ -4,9 +4,6 @@ test('Assert cart cleaned after page refresh', async ({
   menuPage,
   cartPage
  }) => {
-  // const menuPage = new MenuPage(page);
-  // const cartPage = new CartPage(page);
-
   await menuPage.open();
   await menuPage.clickCappucinoCup();
   await menuPage.clickEspressoCup();
