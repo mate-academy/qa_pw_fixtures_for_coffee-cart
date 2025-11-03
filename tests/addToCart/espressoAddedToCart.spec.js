@@ -1,14 +1,12 @@
 import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage }from '../../src/pages/CartPage';
 
-test('Check Espresso correctly added to the Cart', async ({ page }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-      
+test('Check Espresso correctly added to the Cart', async ({
+  menuPage,
+  cartPage,
+}) => {
   await menuPage.open();
   await menuPage.clickEspressoCup();
-  
+
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
