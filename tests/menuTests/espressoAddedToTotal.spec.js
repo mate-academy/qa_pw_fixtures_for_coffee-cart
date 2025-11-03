@@ -1,9 +1,8 @@
 import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
 
-test('Check Espresso cost is added to Total on menu page', async ({ page }) => {
-  const menuPage = new MenuPage(page);
-
+test('Check Espresso cost is added to Total on menu page', async ({
+  menuPage,
+}) => {
   await menuPage.open();
   await menuPage.clickEspressoCup();
 

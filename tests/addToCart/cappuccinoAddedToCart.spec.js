@@ -1,11 +1,9 @@
 import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
 
-test('Check Cappuccino correctly added to the Cart', async ({ page }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-
+test('Check Cappuccino correctly added to the Cart', async ({
+  menuPage,
+  cartPage,
+}) => {
   await menuPage.open();
   await menuPage.clickCappucinoCup();
 
