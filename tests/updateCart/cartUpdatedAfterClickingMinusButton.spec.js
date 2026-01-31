@@ -1,12 +1,11 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../fixtures/fixtures';
+
 
 test('Assert cart updated correctly after clicking minus for drinks', async ({
-  page,
+  menuPage,
+  cartPage,
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+
 
   await menuPage.open();
   await menuPage.clickCappucinoCup();
