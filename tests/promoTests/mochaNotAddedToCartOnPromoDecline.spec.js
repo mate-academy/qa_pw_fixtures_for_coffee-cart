@@ -1,8 +1,7 @@
 import { test } from '../fixtures/fixtures'
 
-test('Assert discounted Mocha added to the Cart after promo accepting', async ({
-  menuPage, cartPage
-}) => {
+test('Assert discounted Mocha is not added to the Cart after promo accepting',
+   async ({ menuPage, cartPage }) => {
   await menuPage.open();
   await menuPage.clickCappucinoCup();
   await menuPage.clickEspressoCup();
