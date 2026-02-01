@@ -1,12 +1,12 @@
-export function unitPriceFormatStr(unitPrice: Number, unitsNumber: Number) {
-  const price = `$${unitPrice} x ${unitsNumber}+-`;
+export function unitPriceFormatStr(unitPrice: number, unitsNumber: number) {
+  const price = `${unitPrice.toFixed(2)} x ${unitsNumber}`;
   return price;
 }
 
-export function priceFormatsStr(unitPrice: Number) {
-  return `$${unitPrice}`;
+export function priceFormatStr(unitPrice: number) {
+  return `$${unitPrice.toFixed(2)}`;
 }
 
-export function totalPriceFormatStr(unitsNumber: Number) {
-  return `Total: $${unitsNumber}`;
+export function totalPriceFormatStr(totalPrice: number) {
+  return `Total: $${totalPrice.toFixed(2)}`;
 }
