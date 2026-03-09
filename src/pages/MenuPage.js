@@ -19,7 +19,7 @@ export class MenuPage {
     await this.page.goto('https://coffee-cart.app/'); 
   }
 
-  async clickCappucinoCup() {
+  async clickCappuccinoCup() {
     await this.cappuccinoCup.click()
   }
 

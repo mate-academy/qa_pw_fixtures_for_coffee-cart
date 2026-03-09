@@ -1,15 +1,13 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../fixtures/fixtures';
 
-test('Check Cappuccino removed from Cart after clicking remove button', async ({
-  page,
-}) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+test('Check Cappuccino removed from Cart after clicking remove button', 
+  async ({
+    cartPage,
+    menuPage
+  }) => {
 
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
+  await menuPage.clickCappuccinoCup();
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
