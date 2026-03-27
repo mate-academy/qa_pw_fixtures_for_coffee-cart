@@ -9,7 +9,7 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
   const cartPage = new CartPage(page);
 
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
+  await menuPage.clickCappuccinoCup();
   await menuPage.clickEspressoCup();
 
   await menuPage.clickCartLink();
@@ -25,7 +25,7 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
   await cartPage.clickAddOneCappuccinoButton();
 
   await cartPage.assertCappuccinoTotalCostContainsCorrectText('$38.00');
-  await cartPage.assertEspressoTotalCostContainsCorrectText('20.00');
+  await cartPage.assertEspressoTotalCostContainsCorrectText('$20.00');
 
   await cartPage.assertTotalCheckoutContainsValue('$58.00');
 });

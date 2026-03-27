@@ -7,7 +7,7 @@ test('Check Cappuccino correctly added to the Cart', async ({ page }) => {
   const cartPage = new CartPage(page);
 
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
+  await menuPage.clickCappuccinoCup();
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
