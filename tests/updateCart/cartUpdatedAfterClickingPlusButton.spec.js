@@ -1,13 +1,8 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../fixtures/fixtures';
+import { COFFEE_PRICES } from '../../src/constants/constants';
 
-test('Assert cart updated correctly after clicking plus for drinks', async ({
-  page,
-}) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-
+test('Assert cart updated correctly after clicking plus for drinks',
+  async ({ menuPage, cartPage }) => {
   await menuPage.open();
   await menuPage.clickCappucinoCup();
   await menuPage.clickEspressoCup();
@@ -15,17 +10,23 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
+  await cartPage.assertEspressoTotalCostContainsCorrectText(
+    COFFEE_PRICES.espresso);
 
   await cartPage.clickAddOneEspressoButton();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$20.00');
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$19.00');
+  await cartPage.assertEspressoTotalCostContainsCorrectText(
+    COFFEE_PRICES.espresso * 2);
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(
+    COFFEE_PRICES.cappuccino);
 
   await cartPage.clickAddOneCappuccinoButton();
 
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$38.00');
-  await cartPage.assertEspressoTotalCostContainsCorrectText('20.00');
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(
+    COFFEE_PRICES.cappuccino * 2);
+  await cartPage.assertEspressoTotalCostContainsCorrectText(
+    COFFEE_PRICES.espresso * 2);
 
-  await cartPage.assertTotalCheckoutContainsValue('$58.00');
+  await cartPage.assertTotalCheckoutContainsValue(
+    (COFFEE_PRICES.cappuccino * 2) + (COFFEE_PRICES.espresso * 2));
 });

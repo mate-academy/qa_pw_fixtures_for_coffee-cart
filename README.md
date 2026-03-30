@@ -22,7 +22,7 @@
 
     - `unitPriceFormatStr` — gets `unitPrice` and `unitsNumber` as input and returns a formatted price, e.g.: `10.00 x 1`
     - `priceFormatStr` — gets `unitPrice` as input and returns a formatted price, e.g.: `$10.00`
-    - `totalPriceFormatStr` — gets `unitsNumber` as input and returns a formatted price, e.g.: `Total: $10.00`
+    - `totalPriceFormatStr` — gets `totalPrice` as input and returns a formatted price, e.g.: `Total: $10.00`
 
 5. Update all the tests to use corresponding fixtures for class initialization.
 6. Update all the tests to use prices from constants and price formatting methods instead of hard-coded prices.
@@ -34,3 +34,6 @@
 2. Push the code to the origin.
 3. Create PR for your changes.
 4. Fix all the suggestions from the code review until PR is approved.
+
+Everything is done.
+
