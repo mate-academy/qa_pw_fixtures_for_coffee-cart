@@ -1,5 +1,5 @@
 import { test } from '../fixtures/fixtures'
-import { ESSPRESSO_COST } from '../../src/constants';
+import { COFFEE_PRICES } from '../../src/constants';
 import { totalPriceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Check Espresso cost is added to Total on menu page', async ({ 
@@ -10,5 +10,5 @@ test('Check Espresso cost is added to Total on menu page', async ({
   await menuPage.clickEspressoCup();
 
   await menuPage.assertTotalCheckoutContainsValue(
-    totalPriceFormatStr(ESSPRESSO_COST));
+    totalPriceFormatStr(COFFEE_PRICES.espresso));
 });

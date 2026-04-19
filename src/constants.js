@@ -1,4 +1,6 @@
-export const ESSPRESSO_COST = 10;
-export const CAPPUCCINO_COST = 19;
-export const AMERICANO_COST = 7;
-export const DISCOUNTED_MOCHA_COST = 4;
+export const COFFEE_PRICES = { 
+  espresso: 10, 
+  cappuccino: 19, 
+  americano: 7, 
+  discountedMocha: 4 
+}

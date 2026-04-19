@@ -1,10 +1,11 @@
 import { test } from '../fixtures/fixtures'
-import { ESSPRESSO_COST } from '../../src/constants';
+import { COFFEE_PRICES } from '../../src/constants';
 import { priceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Check Espresso cup has correct cost', async ({ menuPage }) => {
 
   await menuPage.open();
 
-  await menuPage.assertEspressoCupCostHasValue(priceFormatStr(ESSPRESSO_COST));
+  await menuPage.assertEspressoCupCostHasValue(priceFormatStr(
+    COFFEE_PRICES.espresso));
 });
