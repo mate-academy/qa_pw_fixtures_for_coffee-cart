@@ -1,22 +1,20 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../fixtures/fixtures';
 
-test('Assert cart cleaned after page refresh', async ({ page }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+test('Assert cart cleaned after page refresh', async ({
+    menuPage,
+    cartPage
+}) => {
+    await menuPage.open();
+    await menuPage.clickCappucinoCup();
+    await menuPage.clickEspressoCup();
 
-  await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
+    await menuPage.clickCartLink();
+    await cartPage.waitForLoading();
 
-  await menuPage.clickCartLink();
-  await cartPage.waitForLoading();
+    await cartPage.assertCappuccinoItemIsVisible();
 
-  await cartPage.assertCappuccinoItemIsVisible();
+    await cartPage.reload();
 
-  await cartPage.reload();
-
-  await cartPage.assertCappuccinoItemIsHidden();
-  await cartPage.assertNoCoffeeMessageIsVisible();
+    await cartPage.assertCappuccinoItemIsHidden();
+    await cartPage.assertNoCoffeeMessageIsVisible();
 });
