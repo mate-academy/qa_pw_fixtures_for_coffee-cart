@@ -3,6 +3,7 @@ import {
   unitPriceFormatStr,
   priceFormatStr,
 } from '../../src/common/helpers/getPriceForQuantity';
+import { COFFEE_PRICES } from '../../src/constants';
 
 test('Check Espresso correctly added to the Cart', async ({
   cartPage,
@@ -16,7 +17,9 @@ test('Check Espresso correctly added to the Cart', async ({
 
   await cartPage.assertEspressoNameIsContainsCorrectText();
   await cartPage.assertEspressoUnitContainsCorrectText(
-    unitPriceFormatStr(10, 1),
+    unitPriceFormatStr(COFFEE_PRICES.espresso, 1),
   );
-  await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(10));
+  await cartPage.assertEspressoTotalCostContainsCorrectText(
+    priceFormatStr(COFFEE_PRICES.espresso),
+  );
 });

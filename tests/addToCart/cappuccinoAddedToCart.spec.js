@@ -3,6 +3,7 @@ import {
   unitPriceFormatStr,
   priceFormatStr,
 } from '../../src/common/helpers/getPriceForQuantity';
+import { COFFEE_PRICES } from '../../src/constants';
 
 test('Check Cappuccino correctly added to the Cart', async ({
   cartPage,
@@ -16,9 +17,9 @@ test('Check Cappuccino correctly added to the Cart', async ({
 
   await cartPage.assertCappuccinoNameIsContainsCorrectText();
   await cartPage.assertCappuccinoUnitContainsCorrectText(
-    unitPriceFormatStr(19, 1),
+    unitPriceFormatStr(COFFEE_PRICES.cappuccino, 1),
   );
   await cartPage.assertCappuccinoTotalCostContainsCorrectText(
-    priceFormatStr(19),
+    priceFormatStr(COFFEE_PRICES.cappuccino),
   );
 });
