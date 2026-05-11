@@ -18,7 +18,7 @@ test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   await cartPage.waitForLoading();
 
   await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(COFFEE_PRICES.espresso));
-  await cartPage.assertDiscountedMochaTotalCostContainsCorrectText('$4.00');
+  await cartPage.assertDiscountedMochaTotalCostContainsCorrectText(priceFormatStr(COFFEE_PRICES.mocha / 2));
   await cartPage.assertCappuccinoTotalCostContainsCorrectText(priceFormatStr(COFFEE_PRICES.cappuccino));
   await cartPage.assertAmericanoTotalCostContainsCorrectText(priceFormatStr(COFFEE_PRICES.americano));
 });

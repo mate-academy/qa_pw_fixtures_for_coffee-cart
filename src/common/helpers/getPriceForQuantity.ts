@@ -1,5 +1,3 @@
-import { COFFEE_PRICES } from '../../constants.js';
-
 export function unitPriceFormatStr(unitPrice, unitsNumber) {
   return `$${unitPrice.toFixed(2)} x ${unitsNumber}`
 }
