@@ -9,5 +9,3 @@ const coffeePrices = {
 export default coffeePrices;    
 
 
-
-// This file should export a constant object of coffee prices. For example: { espresso: 10, cappucino: 19}.

@@ -1,12 +1,11 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../../tests/fixtures/fixtures';
+// import { MenuPage } from '../../src/pages/MenuPage';
+// import { CartPage } from '../../src/pages/CartPage';
 
 test('Assert cart updated correctly after clicking plus for drinks', async ({
-  page,
+  cartPage, menuPage
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+  
 
   await menuPage.open();
   await menuPage.clickCappucinoCup();
