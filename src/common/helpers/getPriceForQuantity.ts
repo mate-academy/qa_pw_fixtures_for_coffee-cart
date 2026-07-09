@@ -9,9 +9,6 @@ export function priceFormatStr(unitPrice: number): string {
   return `$${unitPrice.toFixed(2)}`;
 }
 
-export function totalPriceFormatStr(
-  unitPrice: number,
-  unitsNumber: number,
-): string {
-  return `Total: $${(unitPrice * unitsNumber).toFixed(2)}`;
+export function totalPriceFormatStr(unitsNumber: number): string {
+  return `Total: $${unitsNumber.toFixed(2)}`;
 }
