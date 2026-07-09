@@ -2,6 +2,13 @@ import { test as base } from '@playwright/test';
 import { CartPage } from '../../src/pages/CartPage';
 import { MenuPage } from '../../src/pages/MenuPage';
 
+export { COFFEE_PRICES } from '../../src/constants.js';
+export {
+  unitPriceFormatStr,
+  priceFormatStr,
+  totalPriceFormatStr,
+} from '../../src/common/helpers/getPriceForQuantity.ts';
+
 export const test = base.extend<{
   cartPage: CartPage;
   menuPage: MenuPage;
@@ -17,4 +24,3 @@ export const test = base.extend<{
     await use(menuPage);
   },
 });
- 
