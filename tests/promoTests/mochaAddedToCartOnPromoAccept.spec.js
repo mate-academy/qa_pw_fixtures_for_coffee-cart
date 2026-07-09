@@ -1,4 +1,4 @@
-import { test, COFFEE_PRICES, priceFormatStr } from '../_fixtures/fixtures';
+import { test, COFFEE_PRICES, priceFormatStr } from '../fixtures/fixtures';
 
 test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   menuPage,

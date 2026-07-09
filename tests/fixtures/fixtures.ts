@@ -1,6 +1,6 @@
 import { test as base } from '@playwright/test';
-import { CartPage } from '../../src/pages/CartPage';
-import { MenuPage } from '../../src/pages/MenuPage';
+import { CartPage } from '../../src/pages/CartPage.js';
+import { MenuPage } from '../../src/pages/MenuPage.js';
 
 export { COFFEE_PRICES } from '../../src/constants.js';
 export {

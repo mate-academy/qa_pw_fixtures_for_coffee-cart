@@ -1,4 +1,4 @@
-import { test, COFFEE_PRICES, priceFormatStr } from '../_fixtures/fixtures';
+import { test, COFFEE_PRICES, priceFormatStr } from '../fixtures/fixtures';
 
 test('Check Espresso cup has correct cost', async ({ menuPage }) => {
   await menuPage.open();

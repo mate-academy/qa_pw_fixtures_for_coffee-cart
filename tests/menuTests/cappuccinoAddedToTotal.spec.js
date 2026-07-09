@@ -2,7 +2,7 @@ import {
   test,
   COFFEE_PRICES,
   totalPriceFormatStr,
-} from '../_fixtures/fixtures';
+} from '../fixtures/fixtures';
 
 test('Check Cappuccino cost is added to Total on menu page', async ({
   menuPage,
@@ -10,7 +10,5 @@ test('Check Cappuccino cost is added to Total on menu page', async ({
   await menuPage.open();
   await menuPage.clickCappucinoCup();
 
-  await menuPage.assertTotalCheckoutContainsValue(
-    totalPriceFormatStr(COFFEE_PRICES.cappuccino),
-  );
+  await menuPage.assertTotalCheckoutContainsValue(totalPriceFormatStr(COFFEE_PRICES.cappuccino, 1));
 });

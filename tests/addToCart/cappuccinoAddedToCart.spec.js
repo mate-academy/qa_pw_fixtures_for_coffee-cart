@@ -3,7 +3,7 @@ import {
   COFFEE_PRICES,
   unitPriceFormatStr,
   priceFormatStr,
-} from '../_fixtures/fixtures';
+} from '../fixtures/fixtures';
 
 test('Check Cappuccino correctly added to the Cart', async ({
   menuPage,
