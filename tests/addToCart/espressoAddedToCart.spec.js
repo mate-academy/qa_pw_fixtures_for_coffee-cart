@@ -13,7 +13,7 @@ import { unitPriceFormatStr } from '../../src/common/helpers/getPriceForQuantity
 
 test ('Check Espresso added to the cart', async ({
   menuPage,
-  cartPage,
+  cartPage
 }) => {
   await menuPage.open();
   await menuPage.clickEspressoCup();
