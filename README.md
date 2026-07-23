@@ -17,7 +17,7 @@
     - `menuPage`
     - `cartPage`   
 
-3. Create a `constants.js` file in the `./src` folder. This file should export a constant object of coffee prices. For example: `{ espresso: 10, cappucino: 19}`.
+3. Create a `constants.js` file in the `./src` folder. This file should export a constant object of coffee prices. For example: `{ espresso: 10, Cappuccino: 19}`.
 4. Create the `getPriceForQuantity` helper method in the `src/common/helpers/getPriceForQuantity.ts` folder. This file should include the following three functions:
 
     - `unitPriceFormatStr` — gets `unitPrice` and `unitsNumber` as input and returns a formatted price, e.g.: `10.00 x 1`
