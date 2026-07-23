@@ -52,7 +52,7 @@ export class CartPage {
     await this.removeAllEspressoButton.click();
   }
 
-  async clickRemoveAllCappucinoButton() {
+  async clickRemoveAllCappuccinoButton() {
     await this.removeAllCappuccinoButton.click();
   }
 
