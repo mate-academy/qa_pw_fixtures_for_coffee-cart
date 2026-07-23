@@ -7,7 +7,7 @@
 //   const cartPage = new CartPage(page);
       
 import { test } from '../fixtures/fixtures';
-import { coffeePrices } from '../../src/constans';
+import { coffeePrices } from '../../src/constants';
 import { priceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 import { unitPriceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 

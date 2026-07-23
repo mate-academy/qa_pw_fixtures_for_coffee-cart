@@ -2,7 +2,7 @@
 // import { MenuPage } from '../../src/pages/MenuPage';
 // import { CartPage } from '../../src/pages/CartPage';
 import { test } from '../fixtures/fixtures';
-import { coffeePrices } from '../../src/constans';
+import { coffeePrices } from '../../src/constants';
 import { priceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Assert discounted Mocha added to the Cart after promo accepting', async ({
@@ -27,7 +27,7 @@ test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   //await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
   await cartPage.assertEspressoTotalCostContainsCorrectText(
     priceFormatStr(coffeePrices.espresso)
-  )
+  );
   //await cartPage.assertDiscountedMochaTotalCostContainsCorrectText('$4.00');
   await cartPage.assertDiscountedMochaTotalCostContainsCorrectText(
     priceFormatStr(coffeePrices.mocha / 2)
