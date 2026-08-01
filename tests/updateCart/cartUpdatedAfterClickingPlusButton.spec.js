@@ -1,12 +1,11 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../fixtures/fixtures';
+import { prices } from '../../src/constants';
+import { priceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
-test('Assert cart updated correctly after clicking plus for drinks', async ({
-  page,
-}) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+test('Assert cart updated correctly after clicking plus for drinks', 
+  async ({ menuPage, cartPage }) => {
+  // const menuPage = new MenuPage(page);
+  // const cartPage = new CartPage(page);
 
   await menuPage.open();
   await menuPage.clickCappucinoCup();
@@ -15,17 +14,19 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
+  // changed fixed prices to dynamic prices from constants file priceFormatStr
+
+  await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(prices.espresso));
 
   await cartPage.clickAddOneEspressoButton();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$20.00');
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$19.00');
+  await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(prices.espresso * 2));
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(priceFormatStr(prices.cappuccino));
 
   await cartPage.clickAddOneCappuccinoButton();
 
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$38.00');
-  await cartPage.assertEspressoTotalCostContainsCorrectText('20.00');
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(priceFormatStr(prices.cappuccino * 2));
+  await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(prices.espresso * 2));
 
-  await cartPage.assertTotalCheckoutContainsValue('$58.00');
+  await cartPage.assertTotalCheckoutContainsValue(priceFormatStr(prices.espresso * 2 + prices.cappuccino * 2));
 });
