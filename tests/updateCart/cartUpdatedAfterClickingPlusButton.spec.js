@@ -1,13 +1,11 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../fixtures/fixtures';
+import { PRICES } from '../../src/constants';
+import { priceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Assert cart updated correctly after clicking plus for drinks', async ({
-  page,
+  menuPage,
+  cartPage,
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-
   await menuPage.open();
   await menuPage.clickCappucinoCup();
   await menuPage.clickEspressoCup();
@@ -15,17 +13,25 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
+  let espressoTotal = priceFormatStr(PRICES.espresso);
+  await cartPage.assertEspressoTotalCostContainsCorrectText(espressoTotal);
 
   await cartPage.clickAddOneEspressoButton();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$20.00');
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$19.00');
+  espressoTotal = priceFormatStr(PRICES.espresso * 2);
+  await cartPage.assertEspressoTotalCostContainsCorrectText(espressoTotal);
+
+  let cappuccinoTotal = priceFormatStr(PRICES.cappuccino);
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(cappuccinoTotal);
 
   await cartPage.clickAddOneCappuccinoButton();
 
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$38.00');
-  await cartPage.assertEspressoTotalCostContainsCorrectText('20.00');
+  cappuccinoTotal = priceFormatStr(PRICES.cappuccino * 2);
 
-  await cartPage.assertTotalCheckoutContainsValue('$58.00');
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(cappuccinoTotal);
+  await cartPage.assertEspressoTotalCostContainsCorrectText(espressoTotal);
+
+  const total = PRICES.espresso * 2 + PRICES.cappuccino * 2;
+  const totalCheckOut = priceFormatStr(total);
+  await cartPage.assertTotalCheckoutContainsValue(totalCheckOut);
 });

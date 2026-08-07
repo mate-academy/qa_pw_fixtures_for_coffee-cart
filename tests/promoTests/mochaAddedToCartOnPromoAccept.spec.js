@@ -1,13 +1,11 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../fixtures/fixtures';
+import { PRICES } from '../../src/constants';
+import { priceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Assert discounted Mocha added to the Cart after promo accepting', async ({
-  page,
+  menuPage,
+  cartPage,
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-
   await menuPage.open();
   await menuPage.clickCappucinoCup();
   await menuPage.clickEspressoCup();
@@ -20,8 +18,14 @@ test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
-  await cartPage.assertDiscountedMochaTotalCostContainsCorrectText('$4.00');
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$19.00');
-  await cartPage.assertAmericanoTotalCostContainsCorrectText('$7.00');
+  const espressoCost = priceFormatStr(PRICES.espresso);
+  const cappuccinoCost = priceFormatStr(PRICES.cappuccino);
+  const americanoCost = priceFormatStr(PRICES.americano);
+  const discountedMochaCost = priceFormatStr(PRICES.discounted_mocha);
+  await cartPage.assertEspressoTotalCostContainsCorrectText(espressoCost);
+  await cartPage.assertDiscountedMochaTotalCostContainsCorrectText(
+    discountedMochaCost,
+  );
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(cappuccinoCost);
+  await cartPage.assertAmericanoTotalCostContainsCorrectText(americanoCost);
 });
