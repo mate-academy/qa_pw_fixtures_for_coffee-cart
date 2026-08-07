@@ -3,8 +3,8 @@ import { CartPage } from '../../src/pages/CartPage';
 import { MenuPage } from '../../src/pages/MenuPage';
 
 export const test = base.extend<{
-  menuPage;
-  cartPage;
+  menuPage: MenuPage;
+  cartPage: CartPage;
 }>({
   menuPage: async ({ page }, use) => {
     const menuPage = new MenuPage(page);
