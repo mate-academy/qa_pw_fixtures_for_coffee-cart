@@ -1,12 +1,12 @@
-import { test } from '@playwright/test';
+import { test } from '../fixtures/fixtures';
 import { MenuPage } from '../../src/pages/MenuPage';
 import { CartPage } from '../../src/pages/CartPage';
+import { COFFEE_PRICES } from '../../src/constants';
+import { unitPriceFormatStr, priceFormatStr, totalPriceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Assert cart updated correctly after clicking plus for drinks', async ({
-  page,
+  page,menuPage, cartPage
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
 
   await menuPage.open();
   await menuPage.clickCappucinoCup();
@@ -15,17 +15,17 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
+  await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(COFFEE_PRICES.ESPRESSO_PRICE));
 
   await cartPage.clickAddOneEspressoButton();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$20.00');
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$19.00');
+  await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(COFFEE_PRICES.ESPRESSO_PRICE * 2));
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(priceFormatStr(COFFEE_PRICES.CAPPUCCINO_PRICE));
 
   await cartPage.clickAddOneCappuccinoButton();
 
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$38.00');
-  await cartPage.assertEspressoTotalCostContainsCorrectText('20.00');
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(priceFormatStr(COFFEE_PRICES.CAPPUCCINO_PRICE * 2));
+  await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(COFFEE_PRICES.ESPRESSO_PRICE * 2));
 
-  await cartPage.assertTotalCheckoutContainsValue('$58.00');
+  await cartPage.assertTotalCheckoutContainsValue(totalPriceFormatStr(COFFEE_PRICES.ESPRESSO_PRICE * 2 + COFFEE_PRICES.CAPPUCCINO_PRICE * 2));
 });
