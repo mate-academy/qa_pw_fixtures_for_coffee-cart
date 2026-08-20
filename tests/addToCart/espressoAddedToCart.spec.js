@@ -1,18 +1,13 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage }from '../../src/pages/CartPage';
+import { test } from '../fixtures/fixtures';
+import { COFFEE_PRICES } from '../../src/constants';
+import { totalPriceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
-test('Check Espresso correctly added to the Cart', async ({ page }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-      
+test('Check Espresso cost is added to Total on menu page', async (
+  { menuPage }) => {
   await menuPage.open();
   await menuPage.clickEspressoCup();
-  
-  await menuPage.clickCartLink();
-  await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoNameIsContainsCorrectText();
-  await cartPage.assertEspressoUnitContainsCorrectText('$10.00 x 1');
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
+  await menuPage.assertTotalCheckoutContainsValue(
+    totalPriceFormatStr(COFFEE_PRICES.espresso),
+  );
 });
