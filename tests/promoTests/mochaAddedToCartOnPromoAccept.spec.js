@@ -1,6 +1,7 @@
 import { test } from '../fixtures/fixtures';
 import { coffeePrices } from '../../src/pages/constants';
-import { priceFormatStr } from '../../src/pages/common/helpers/getPriceForQuantity';
+import { priceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
+
 test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   menuPage,
   cartPage,

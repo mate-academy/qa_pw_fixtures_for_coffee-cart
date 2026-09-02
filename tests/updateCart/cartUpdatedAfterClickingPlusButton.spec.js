@@ -1,7 +1,7 @@
 import { test } from '../fixtures/fixtures';
 import { coffeePrices } from '../../src/pages/constants';
-import { priceFormatStr } from '../../src/pages/common/helpers/getPriceForQuantity';
-import { totalPriceFormatStr } from '../../src/pages/common/helpers/getPriceForQuantity';
+import { priceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
+import { totalPriceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Assert cart updated correctly after clicking plus for drinks', async ({
   menuPage,
