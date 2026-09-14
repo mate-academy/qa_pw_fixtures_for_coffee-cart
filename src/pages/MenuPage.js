@@ -33,7 +33,10 @@ export class MenuPage {
   }
 
   async clickCartLink() {
-    await this.cartLink.click()
+    await Promise.all([
+      this.page.waitForURL('https://coffee-cart.app/cart'),
+      this.cartLink.click(),
+    ]);
   }  
 
   async clickYesPromoButton() {
