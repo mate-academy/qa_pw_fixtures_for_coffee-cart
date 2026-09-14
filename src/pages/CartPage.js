@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const { expect } = require('@playwright/test');
 
 export class CartPage {
@@ -52,7 +53,7 @@ export class CartPage {
     await this.removeAllEspressoButton.click();
   }
 
-  async clickRemoveAllCappucinoButton() {
+  async clickRemoveAllCappuccinoButton() {
     await this.removeAllCappuccinoButton.click();
   }
 

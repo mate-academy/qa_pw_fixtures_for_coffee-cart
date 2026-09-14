@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const { expect } = require('@playwright/test');
 
 export class MenuPage {
@@ -19,7 +20,7 @@ export class MenuPage {
     await this.page.goto('https://coffee-cart.app/'); 
   }
 
-  async clickCappucinoCup() {
+  async clickCappuccinoCup() {
     await this.cappuccinoCup.click()
   }
 
@@ -32,7 +33,10 @@ export class MenuPage {
   }
 
   async clickCartLink() {
-    await this.cartLink.click()
+    await Promise.all([
+      this.page.waitForURL('https://coffee-cart.app/cart'),
+      this.cartLink.click(),
+    ]);
   }  
 
   async clickYesPromoButton() {
