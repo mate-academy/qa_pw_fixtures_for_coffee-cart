@@ -1,11 +1,10 @@
 import { test } from '../fixtures/fixtures';
 import { COFFEE_PRICES } from '../../src/constants';
-import {
-  priceFormatStr
-} from '../../src/common/helpers/getPriceForQuantity';
+import { priceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Assert discounted Mocha added to the Cart after promo accepting', async ({
-  menuPage, cartPage
+  menuPage,
+  cartPage,
 }) => {
   await menuPage.open();
   await menuPage.clickCappucinoCup();
@@ -20,15 +19,15 @@ test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   await cartPage.waitForLoading();
 
   await cartPage.assertEspressoTotalCostContainsCorrectText(
-    priceFormatStr(COFFEE_PRICES.expresso)
+    priceFormatStr(COFFEE_PRICES.espresso),
   );
   await cartPage.assertDiscountedMochaTotalCostContainsCorrectText(
-    priceFormatStr(COFFEE_PRICES.discountedMocha)
+    priceFormatStr(COFFEE_PRICES.discountedMocha),
   );
   await cartPage.assertCappuccinoTotalCostContainsCorrectText(
-    priceFormatStr(COFFEE_PRICES.cappuccino)
+    priceFormatStr(COFFEE_PRICES.cappuccino),
   );
   await cartPage.assertAmericanoTotalCostContainsCorrectText(
-    priceFormatStr(COFFEE_PRICES.americano)
+    priceFormatStr(COFFEE_PRICES.americano),
   );
 });

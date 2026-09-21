@@ -6,7 +6,8 @@ import {
 } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Check Cappuccino correctly added to the Cart', async ({
-  menuPage, cartPage
+  menuPage,
+  cartPage,
 }) => {
   await menuPage.open();
   await menuPage.clickCappucinoCup();
@@ -16,9 +17,9 @@ test('Check Cappuccino correctly added to the Cart', async ({
 
   await cartPage.assertCappuccinoNameIsContainsCorrectText();
   await cartPage.assertCappuccinoUnitContainsCorrectText(
-    unitPriceFormatStr(COFFEE_PRICES.cappuccino, 1)
+    unitPriceFormatStr(COFFEE_PRICES.cappuccino, 1),
   );
   await cartPage.assertCappuccinoTotalCostContainsCorrectText(
-    priceFormatStr(COFFEE_PRICES.cappuccino)
+    priceFormatStr(COFFEE_PRICES.cappuccino),
   );
 });
