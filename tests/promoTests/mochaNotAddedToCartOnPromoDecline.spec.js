@@ -1,13 +1,10 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
 
-test('Assert discounted Mocha added to the Cart after promo accepting', async ({
-  page,
+import { test } from '../fixtures/fixtures';
+
+test('Assert Mocha is not added to the Cart after promo decline', async ({
+  menuPage,
+  cartPage,
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-
   await menuPage.open();
   await menuPage.clickCappucinoCup();
   await menuPage.clickEspressoCup();
@@ -21,7 +18,6 @@ test('Assert discounted Mocha added to the Cart after promo accepting', async ({
 
   await cartPage.assertEspressoItemIsVisible();
   await cartPage.assertDiscountedMochaItemIsHidden();
-
   await cartPage.assertCappuccinoItemIsVisible();
   await cartPage.assertAmericanoItemIsVisible();
 });
