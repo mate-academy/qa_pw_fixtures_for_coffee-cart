@@ -4,13 +4,16 @@ export class MenuPage {
   constructor(page) {
     this.page = page; 
     this.cappuccinoCup = page.getByTestId('Cappuccino');
-    this.cappuccinoCupCost = page.getByRole('listitem').filter({ has: this.cappuccinoCup })
+    this.cappuccinoCupCost = page.getByRole('listitem')
+    .filter({ has: this.cappuccinoCup })
     this.espressoCup = page.getByTestId('Espresso');
-    this.espressoCupCost = page.getByRole('listitem').filter({ has: this.espressoCup })
+    this.espressoCupCost = page.getByRole('listitem')
+    .filter({ has: this.espressoCup })
     this.americanoCup = page.getByTestId('Americano');
     this.cartLink = page.getByLabel('Cart page');
     this.totalCheckout = page.getByTestId('checkout');
-    this.promoMessage = page.getByText("It's your lucky day! Get an extra cup of Mocha for $4.");
+    this.promoMessage = page
+    .getByText("It's your lucky day! Get an extra cup of Mocha for $4.");
     this.yesPromoButton = page.getByRole('button', { name: 'Yes, of course!' });
     this.noPromoButton = page.getByRole('button', { name: "Nah, I'll skip." });
   }
