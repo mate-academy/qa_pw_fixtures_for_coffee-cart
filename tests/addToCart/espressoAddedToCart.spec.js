@@ -1,11 +1,15 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage }from '../../src/pages/CartPage';
+import { test } from '../fixtures/fixtures';
+import { prices } from '../../src/constants';
+import {
+  unitPriceFormatStr, 
+  priceFormatStr, 
+  totalPrice, 
+  totalPriceFormatStr 
+} from '../../src/common/helpers/getPriceForQuantity';
 
-test('Check Espresso correctly added to the Cart', async ({ page }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-      
+test('Check Espresso correctly added to the Cart', async ({ page, cartPage, menuPage }) => { 
+  const espressoPrice = prices.Espresso;
+
   await menuPage.open();
   await menuPage.clickEspressoCup();
   
@@ -13,6 +17,6 @@ test('Check Espresso correctly added to the Cart', async ({ page }) => {
   await cartPage.waitForLoading();
 
   await cartPage.assertEspressoNameIsContainsCorrectText();
-  await cartPage.assertEspressoUnitContainsCorrectText('$10.00 x 1');
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
+  await cartPage.assertEspressoUnitContainsCorrectText(unitPriceFormatStr(espressoPrice, 1));
+  await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(espressoPrice));
 });

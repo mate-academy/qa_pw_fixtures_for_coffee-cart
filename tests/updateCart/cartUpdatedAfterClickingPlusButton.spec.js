@@ -1,12 +1,19 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../fixtures/fixtures';
+import { prices } from '../../src/constants';
+import { 
+  priceFormatStr,
+  totalPriceFormatStr, 
+  totalPrice
+} 
+from '../../src/common/helpers/getPriceForQuantity';
 
 test('Assert cart updated correctly after clicking plus for drinks', async ({
   page,
+  menuPage,
+  cartPage
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
+  const cappuccinoPrice = prices.Cappuccino;
+  const espressoPrice = prices.Espresso;
 
   await menuPage.open();
   await menuPage.clickCappucinoCup();
@@ -15,17 +22,27 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
+  await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(espressoPrice));
 
   await cartPage.clickAddOneEspressoButton();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$20.00');
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$19.00');
+  await cartPage.assertEspressoTotalCostContainsCorrectText(
+    priceFormatStr(totalPrice(espressoPrice, 2))
+);
 
-  await cartPage.clickAddOneCappuccinoButton();
+await cartPage.assertCappuccinoTotalCostContainsCorrectText(
+    priceFormatStr(cappuccinoPrice)
+);
 
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$38.00');
-  await cartPage.assertEspressoTotalCostContainsCorrectText('20.00');
+await cartPage.clickAddOneCappuccinoButton();
 
-  await cartPage.assertTotalCheckoutContainsValue('$58.00');
+await cartPage.assertCappuccinoTotalCostContainsCorrectText(
+    priceFormatStr(totalPrice(cappuccinoPrice, 2))
+);
+
+await cartPage.assertEspressoTotalCostContainsCorrectText(
+    priceFormatStr(totalPrice(espressoPrice, 2))
+);
+
+  await cartPage.assertTotalCheckoutContainsValue(priceFormatStr(totalPrice(espressoPrice, 2) + totalPrice(cappuccinoPrice, 2)));
 });
